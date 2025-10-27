@@ -15,29 +15,30 @@ public:
         if(root==nullptr){
             return false;
         }
-        stack<TreeNode*>s;
-        stack<int>sVal;
+        stack<TreeNode*>st;
+        stack<int>stVal;
 
-        s.push(root);
-        sVal.push(root->val);
+        st.push(root);
+        stVal.push(root->val);
+        while(!st.empty()){
 
-        while(!s.empty()){
-            TreeNode*temp=s.top();
-            s.pop();
-            int val=sVal.top();
-            sVal.pop();
+            TreeNode*temp=st.top();
+            st.pop();
 
-            if(temp->left==nullptr && temp->right==nullptr && val==targetSum){
+            int temp2=stVal.top();
+            stVal.pop();
+
+            if(temp->left==nullptr && temp->right==nullptr && temp2==targetSum){
                 return true;
             }
 
-            if(temp->right!=nullptr){
-                s.push(temp->right);
-                sVal.push(val+temp->right->val);
+            if(temp->right){
+                st.push(temp->right);
+                stVal.push(temp2+temp->right->val);
             }
-            if(temp->left!=nullptr){
-                s.push(temp->left);
-                sVal.push(val+temp->left->val);
+            if(temp->left){
+                st.push(temp->left);
+                stVal.push(temp2+temp->left->val);
             }
         }
         return false;
