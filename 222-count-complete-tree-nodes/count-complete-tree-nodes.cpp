@@ -12,30 +12,19 @@
 class Solution {
 public:
     int countNodes(TreeNode* root) {
-        int height1=rightDepth(root);
-        int height2=leftDepth(root);
+        vector<int>result;
+        inorder(root,result);
 
-        if(height1==height2){
-            return (int)pow(2,height1)-1;
-        }
-        else{
-            return 1+ countNodes(root->left) + countNodes(root->right);
-        }
+        return result.size();
+        
     }
-    int rightDepth(TreeNode*root){
-        int count=0;
-        while(root!=nullptr){
-            count++;
-            root=root->right;
+
+    void inorder(TreeNode*root,vector<int>&result){
+        if(root==nullptr){
+            return;
         }
-        return count;
-    }
-    int leftDepth(TreeNode*root){
-        int count=0;
-        while(root!=nullptr){
-            count++;
-            root=root->left;
-        }
-        return count;
+        inorder(root->left,result);
+        result.push_back(root->val);
+        inorder(root->right,result);
     }
 };
