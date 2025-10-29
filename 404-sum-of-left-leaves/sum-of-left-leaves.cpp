@@ -16,8 +16,7 @@ public:
         if(root==nullptr){
             return 0;
         }
-
-        if(root->left && root->left->left== nullptr && root->left->right==nullptr){
+        if(root->left && root->left->left == nullptr && root->left->right == nullptr){
             sum+=root->left->val;
         }
 
@@ -25,6 +24,5 @@ public:
         sum+=sumOfLeftLeaves(root->right);
 
         return sum;
-        
     }
 };
