@@ -11,33 +11,35 @@
  */
 class Solution {
 public:
-unordered_map<int,int>result;
     vector<int> findMode(TreeNode* root) {
-        if(!root){
-            return {};
-        }
-        dfs(root);
-        int maxFreq=0;
+        vector<int>result;
+        helper(root,result);
 
-        for(auto &p :result){
+        unordered_map<int,int>answer;
+        for(int val:result){
+            answer[val]++;
+        }
+        int maxFreq=0;
+        for(auto &p : answer){
             maxFreq=max(maxFreq,p.second);
         }
-        
-        vector<int>temp;
-        for(auto&p : result){
-            if(p.second==maxFreq){
-                temp.push_back(p.first);
+
+        vector<int>vipul;
+        for(auto&p : answer){
+            if(maxFreq==p.second){
+                vipul.push_back(p.first);
             }
         }
+        return vipul;
 
-        return temp;
     }
-    void dfs(TreeNode*root){
-        if(!root){
+
+    void helper(TreeNode*root,vector<int>&result){
+        if(root==nullptr){
             return;
         }
-        result[root->val]++;
-        dfs(root->left);
-        dfs(root->right);
+        helper(root->left,result);
+        result.push_back(root->val);
+        helper(root->right,result);
     }
 };
