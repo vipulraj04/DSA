@@ -13,20 +13,22 @@ class Solution {
 public:
     int getMinimumDifference(TreeNode* root) {
         vector<int>result;
-        inorder(root,result);
+        helper(root,result);
         int minDiff=INT_MAX;
-
         for(int i=1;i<result.size();i++){
-            minDiff=min(minDiff,result[i]-result[i-1]);
+            minDiff=min(minDiff,abs(result[i]-result[i-1]));
         }
+
         return minDiff;
+        
     }
-    void inorder(TreeNode*root,vector<int>&result){
+
+    void helper(TreeNode* root,vector<int>&result){
         if(root==nullptr){
             return;
         }
-        inorder(root->left,result);
+        helper(root->left,result);
         result.push_back(root->val);
-        inorder(root->right,result);
+        helper(root->right,result);
     }
 };
