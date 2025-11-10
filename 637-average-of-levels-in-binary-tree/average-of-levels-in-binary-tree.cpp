@@ -18,9 +18,11 @@ public:
         }
         queue<TreeNode*>q;
         q.push(root);
+
         while(!q.empty()){
             int size=q.size();
             double total=0;
+
             for(int i=0;i<size;i++){
                 TreeNode*temp=q.front();
                 q.pop();
@@ -36,6 +38,5 @@ public:
             result.push_back(total/size);
         }
         return result;
-        
     }
 };
