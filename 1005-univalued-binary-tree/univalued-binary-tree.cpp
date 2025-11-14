@@ -12,21 +12,22 @@
 class Solution {
 public:
     bool isUnivalTree(TreeNode* root) {
-    if(root==nullptr){
-        return true;
-    }
+        set<int>result;
+        traversal(root,result);
 
-    if(root->left){
-        if(root->left->val != root->val)
+        if(result.size()==1){
+            return true;
+        }
+
         return false;
     }
-    if(root->right){
-        if(root->right->val!=root->val){
-            return false;
-        }
-    }
 
-    return isUnivalTree(root->left) && isUnivalTree(root->right);
-        
+    void traversal(TreeNode*root,set<int>&result){
+        if(root==nullptr){
+            return;
+        }
+        traversal(root->left,result);
+        result.insert(root->val);
+        traversal(root->right,result);
     }
 };
