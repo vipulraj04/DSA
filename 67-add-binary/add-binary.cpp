@@ -1,29 +1,26 @@
 class Solution {
 public:
     string addBinary(string a, string b) {
-        int lenA=a.length();
-        int lenB=b.length();
-        int i=lenA-1;
-        int j=lenB-1;
-        int carry=0;
-        string result="";
+        string res="";
+        int i=a.size()-1;
+        int j=b.size()-1;
 
-        while(i>=0 || j>=0 || carry ){
+        int carry=0;
+        while(i>=0 || j>=0 || carry){
             int sum=carry;
+
             if(i>=0){
-                sum+=a[i]-'0';
-                i--;
+                sum+=a[i--]-'0';
             }
             if(j>=0){
-                sum+=b[j]-'0';
-                j--;
+                sum+=b[j--]-'0';
             }
 
-            result.push_back((sum%2)+'0');
+            res+=sum%2+'0';
             carry=sum/2;
         }
-        reverse(result.begin(),result.end());
-        return result;
-        
+
+        reverse(res.begin(), res.end());
+        return res;
     }
 };
