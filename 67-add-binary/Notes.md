@@ -1,1 +1,1 @@
-<h2>add-binary Notes</h2><hr>[ Time taken: 9 m 33 s ]
+<h2>add-binary Notes</h2><hr>[ Time taken: 8 m 54 s ]
