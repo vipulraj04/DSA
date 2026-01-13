@@ -14,22 +14,12 @@ public:
     void recoverTree(TreeNode* root) {
         inorder(root);
 
-        TreeNode*first=nullptr;
-        TreeNode*second=nullptr;
-
-        for(int i=0;i<result.size()-1;i++){
-            if(result[i]->val > result[i+1]->val){
-
-                if(!first)
-                first=result[i];
-
-                second=result[i+1];
-            }
-        }
-
-        swap(first->val,second->val);
+        swap(first->val , second->val);
+        
     }
-    vector<TreeNode*>result;
+    TreeNode*prev=nullptr;
+    TreeNode*first=nullptr;
+    TreeNode*second=nullptr;
 
     void inorder(TreeNode*root){
         if(!root){
@@ -37,7 +27,16 @@ public:
         }
 
         inorder(root->left);
-        result.push_back(root);
+
+        if(prev && prev->val > root->val){
+
+            if(!first){
+                first=prev;
+            }
+            second=root;
+        }
+        prev=root;
+
         inorder(root->right);
     }
 };
