@@ -11,22 +11,34 @@
  */
 class Solution {
 public:
+long long minVal;
+long long secondVal;
     int findSecondMinimumValue(TreeNode* root) {
-        set<int> s;
-        dfs(root, s);  
+
+        minVal=LLONG_MAX;
+        secondVal=LLONG_MAX;
         
-        if (s.size() < 2) return -1;
+        traversal(root);
 
-        auto it = s.begin();
-        ++it; 
-        return *it;
-    }
-
-private:
-    void dfs(TreeNode* node, set<int>& s) {
-        if (!node) return;
-        s.insert(node->val);
-        dfs(node->left, s);
-        dfs(node->right, s);
+        if(secondVal==LLONG_MAX){
+            return -1;
+        }
+        else{
+            return secondVal;
+        }
+    } 
+    void traversal(TreeNode*root){
+        if(root==nullptr){
+            return;
+        }
+        if(root->val < minVal){
+            secondVal=minVal;
+            minVal=root->val;
+        }
+        else if(root->val > minVal && root->val < secondVal){
+            secondVal=root->val;
+        }
+        traversal(root->left);
+        traversal(root->right);
     }
 };
