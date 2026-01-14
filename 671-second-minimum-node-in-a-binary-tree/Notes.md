@@ -1,1 +1,1 @@
-<h2>second-minimum-node-in-a-binary-tree Notes</h2><hr>[ Time taken: 45 m 51 s ]
+<h2>second-minimum-node-in-a-binary-tree Notes</h2><hr>[ Time taken: 1 hr 32 m 31 s ]
