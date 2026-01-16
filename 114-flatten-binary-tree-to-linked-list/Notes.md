@@ -1,1 +1,1 @@
-<h2>flatten-binary-tree-to-linked-list Notes</h2><hr>[ Time taken: 29 m 20 s ]
+<h2>flatten-binary-tree-to-linked-list Notes</h2><hr>[ Time taken: 30 m 47 s ]
