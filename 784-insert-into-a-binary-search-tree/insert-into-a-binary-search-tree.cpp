@@ -12,16 +12,32 @@
 class Solution {
 public:
     TreeNode* insertIntoBST(TreeNode* root, int val) {
-        if(root==nullptr){
-            return new TreeNode(val);
-        }
+        vector<int>result;
+        traversal(root,result);
 
-        if(val < root->val){
-            root->left=insertIntoBST(root->left,val);
+        result.insert(lower_bound(result.begin(),result.end(),val),val);
+
+        return newTree(result,0,result.size()-1);
+    }
+    void traversal(TreeNode*root,vector<int>&result){
+        if(root==nullptr){
+            return;
         }
-        else{
-            root->right = insertIntoBST(root->right,val);
+        traversal(root->left,result);
+        result.push_back(root->val);
+        traversal(root->right,result);
+    }
+
+    TreeNode*newTree(vector<int>&result,int start,int end){
+        if(start > end){
+            return nullptr;
         }
+        int mid=start+(end-start)/2;
+
+        TreeNode*root=new TreeNode(result[mid]);
+
+        root->left=newTree(result,start,mid-1);
+        root->right=newTree(result,mid+1,end);
 
         return root;
     }
