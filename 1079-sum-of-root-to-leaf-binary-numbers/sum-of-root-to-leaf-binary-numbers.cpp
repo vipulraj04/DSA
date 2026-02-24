@@ -11,21 +11,24 @@
  */
 class Solution {
 public:
-    int sumRootToLeaf(TreeNode* root) {
+int total=0;
+void helper(TreeNode*root,string path){
+    if(root==nullptr){
+        return ;
+    }
+    path+=to_string(root->val);
 
-        return dfs(root,0);
+    if(root->left==nullptr && root->right==nullptr){
+        int sum = stoi(path,0,2);
+        total+=sum;
     }
 
-    int dfs(TreeNode*root,int sum){
-        if(!root){
-            return 0;
-        }
-        sum=(sum*2)+root->val;
+    helper(root->left,path);
+    helper(root->right,path);
+}
+    int sumRootToLeaf(TreeNode* root) {
+        helper(root,"");
 
-        if(root->left==nullptr && root->right==nullptr){
-            return sum;
-        }
-
-        return dfs(root->left,sum)+dfs(root->right,sum);
+        return total;
     }
 };
