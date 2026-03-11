@@ -1,24 +1,20 @@
 class Solution {
 public:
     int bitwiseComplement(int n) {
-        string s=bitset<32>(n).to_string();
         if(n==0){
             return 1;
         }
+        int count=0;
+        int result=0;
 
-        int num=floor(log2(n))+1;
+        while(n){
+            int r=n%2;
 
-        string result="";
-        for(int i=32-num;i<32;i++){
-            if(s[i]=='0'){
-                result+='1';
-            }
-            else{
-                result+='0';
-            }
+            result+=(pow(2,count)*!r);
+            count++;
+            n=n/2;
         }
-        int ans=stoi(result,nullptr,2);
 
-        return ans;
+        return result;
     }
 };
