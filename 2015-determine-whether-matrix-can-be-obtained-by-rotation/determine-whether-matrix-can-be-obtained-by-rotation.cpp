@@ -23,6 +23,9 @@ void rotate(vector<vector<int>>& mat){
                         break;
                     }
                 }
+                if(!found){
+                    break;
+                }
             }
             if(found){
                 return true;
