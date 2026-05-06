@@ -17,24 +17,16 @@ public:
         }
 
         for(int j=0;j<n;j++){
+            int rowCount=m-1;
             for(int i=m-1;i>=0;i--){
-                if(result[i][j]=='.'){
-                    int stoneRow=-1;
-
-                    for(int k=i-1;k>=0;k--){
-                        if(result[k][j]=='*'){
-                            break;
-                        }
-                        else if(result[k][j]=='#'){
-                            stoneRow=k;
-                            break;
-                        }
-                    }
-
-                    if(stoneRow!=-1){
-                        result[i][j]='#';
-                        result[stoneRow][j]='.';
-                    }
+                if(result[i][j]=='*'){
+                    rowCount=i-1;
+                    continue;
+                }
+                if(result[i][j]=='#'){
+                    result[i][j]='.';
+                    result[rowCount][j]='#';
+                    rowCount--;
                 }
             }
         }
