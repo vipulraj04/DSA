@@ -10,13 +10,10 @@ int sum(int num){
     return res;
 }
     int minElement(vector<int>& nums) {
-        int n=nums.size();
-        vector<int>result(n);
-        for(int i=0;i<n;i++){
-            result[i]=sum(nums[i]);
+        int ans=INT_MAX;
+        for(int num : nums){
+            ans=min(ans,sum(num));
         }
-
-        return *min_element(result.begin(),result.end());
-
+        return ans;
     }
 };
