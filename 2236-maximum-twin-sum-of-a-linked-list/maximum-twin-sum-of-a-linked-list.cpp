@@ -10,12 +10,12 @@
  */
 class Solution {
 public:
-ListNode*revLL(ListNode*head){
+ListNode*reverse(ListNode*head){
     if(head==nullptr){
         return head;
     }
-    ListNode*temp=head;
     ListNode*prev=nullptr;
+    ListNode*temp=head;
     while(temp!=nullptr){
         ListNode*next=temp->next;
         temp->next=prev;
@@ -27,25 +27,22 @@ ListNode*revLL(ListNode*head){
     int pairSum(ListNode* head) {
         ListNode*slow=head;
         ListNode*fast=head;
-
         while(fast!=nullptr && fast->next!=nullptr){
             slow=slow->next;
             fast=fast->next->next;
         }
-
-        ListNode*newHead=revLL(slow);
-        int maxSum=0;
-        ListNode*temp=head;
+        ListNode*newHead=reverse(slow);
+        ListNode*temp1=head;
         ListNode*temp2=newHead;
-
+        int maxSum=INT_MIN;
         while(temp2!=nullptr){
-            int sum=temp->val+temp2->val;
+            int currSum=0;
+            currSum+=temp1->val+temp2->val;
 
-            maxSum=max(maxSum,sum);
-            temp=temp->next;
+            maxSum=max(currSum,maxSum);
+            temp1=temp1->next;
             temp2=temp2->next;
         }
-
         return maxSum;
     }
 };
