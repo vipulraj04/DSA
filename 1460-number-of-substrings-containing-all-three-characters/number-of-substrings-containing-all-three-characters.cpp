@@ -9,7 +9,7 @@ public:
             char ch=s[j];
             mp[ch-'a']++;
 
-            while(mp[0]>0 && mp[1]>0 && mp[2]>0){
+            while(mp[0] && mp[1] && mp[2]){
                 count+=(n-j);
                 mp[s[i]-'a']--;
                 i++;
