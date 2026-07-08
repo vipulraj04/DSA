@@ -1,34 +1,32 @@
 class Solution {
 public:
-bool isCycle(int src,vector<bool>&visited,vector<bool>&recu,
-vector<vector<int>>& adj,vector<int>&check){
+bool dfs(int src,vector<bool>&visited,vector<bool>&recuPath,vector<int>&check,vector<vector<int>>& graph){
     visited[src]=true;
-    recu[src]=true;
+    recuPath[src]=true;
     check[src]=0;
-    for(int ne : adj[src]){
+    for(int ne: graph[src]){
         if(!visited[ne]){
-            if(isCycle(ne,visited,recu,adj,check)){
+            if(dfs(ne,visited,recuPath,check,graph)){
                 return true;
             }
         }
-        else if(recu[ne]){
+        else if(recuPath[ne]){
             return true;
         }
     }
     check[src]=1;
-    recu[src]=false;
+    recuPath[src]=false;
     return false;
 }
-    vector<int> eventualSafeNodes(vector<vector<int>>& adj) {
-        int n=adj.size();
+    vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
+        int n=graph.size();
         vector<bool>visited(n,false);
-        vector<bool>recu(n,false);
+        vector<bool>recuPath(n,false);
+        vector<int>check(n);
         vector<int>result;
-        vector<int>check(n,0);
-
         for(int i=0;i<n;i++){
             if(!visited[i]){
-                isCycle(i,visited,recu,adj,check);
+                dfs(i,visited,recuPath,check,graph);
             }
         }
         for(int i=0;i<n;i++){
@@ -36,7 +34,6 @@ vector<vector<int>>& adj,vector<int>&check){
                 result.push_back(i);
             }
         }
-
         return result;
     }
 };
