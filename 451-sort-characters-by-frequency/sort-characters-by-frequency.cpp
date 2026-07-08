@@ -2,9 +2,9 @@ class Solution {
 public:
     string frequencySort(string s) {
         vector<pair<char,int>>result(256);
-        for(char ch : s){
-            result[(unsigned char)ch].first=ch;
-            result[(unsigned char)ch].second++;
+        for(char &ch : s){
+            int freq=result[ch].second;
+            result[ch]={ch,freq+1};
         }
         auto lambda=[](pair<char,int>&p1,pair<char,int>&p2){
             return p1.second > p2.second;
