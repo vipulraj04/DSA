@@ -1,21 +1,21 @@
 class Solution {
 public:
-vector<int>getDigit(int n){
-    vector<int>result;
-    while(n){
-        result.push_back(n%10);
-        n=n/10;
-    }
-    return result;
-}
     int maxProduct(int n) {
-        vector<int>result=getDigit(n);
-        int maxProduct=0;
-        for(int i=0;i<result.size();i++){
-            for(int j=i+1;j<result.size();j++){
-                maxProduct = max(maxProduct, result[i] * result[j]);
+        int largest=-1;
+        int secondLargest=-1;
+        while(n){
+            int digit=n%10;
+            if(digit >= largest){
+                secondLargest=largest;
+                largest=digit;
             }
+            else if(digit>=secondLargest){
+                secondLargest=digit;
+            }
+
+            n=n/10;
         }
-        return maxProduct;
+
+        return largest*secondLargest;
     }
 };
