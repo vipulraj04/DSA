@@ -4,19 +4,13 @@ public:
         int maxi=*max_element(nums.begin(),nums.end());
         int mini=*min_element(nums.begin(),nums.end());
 
-        vector<int>count(101,0);
-        for(int i=0;i<nums.size();i++){
-            count[nums[i]]++;
-        }
-
+        set<int>st(nums.begin(),nums.end());
         vector<int>result;
-        for(int i=mini;i<maxi;i++){
-            if(count[i]==0){
+        for(int i=mini+1;i<maxi;i++){
+            if(!st.count(i)){
                 result.push_back(i);
             }
         }
-
-        sort(result.begin(),result.end());
         return result;
     }
 };
