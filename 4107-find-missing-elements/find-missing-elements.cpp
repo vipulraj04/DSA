@@ -4,18 +4,18 @@ public:
         int maxi=*max_element(nums.begin(),nums.end());
         int mini=*min_element(nums.begin(),nums.end());
 
-        unordered_set<int>st;
-        for(int it:nums){
-            st.insert(it);
+        vector<int>count(101,0);
+        for(int i=0;i<nums.size();i++){
+            count[nums[i]]++;
         }
+
         vector<int>result;
-        int i=mini;
-        while(i<maxi){
-            if(!st.count(i)){
+        for(int i=mini;i<maxi;i++){
+            if(count[i]==0){
                 result.push_back(i);
             }
-            i++;
         }
+
         sort(result.begin(),result.end());
         return result;
     }
