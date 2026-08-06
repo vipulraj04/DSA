@@ -10,7 +10,7 @@ int digitProduct(int n){
     return result;
 }
     int smallestNumber(int n, int t) {
-        for(int i=n;i<=100;i++){
+        for(int i=n;i<=n+10;i++){
             if(digitProduct(i)%t ==0){
                 return i;
             }
