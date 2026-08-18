@@ -2,31 +2,32 @@ class Solution {
 public:
     int largestInteger(vector<int>& nums, int k) {
         int n=nums.size();
-        map<int ,int>mainMap;
-        map<int,int>wMap;
-        int left=0;
-        for(int right=0;right<n;right++){
-            wMap[nums[right]]++;
-
-            if(right-left+1 ==k){
-                for(auto & it:wMap){
-                    mainMap[it.first]++;
-                }
-
-                wMap[nums[left]]--;
-
-                if(wMap[nums[left]]==0){
-                    wMap.erase(nums[left]);
-                }
-                left++;
-            }
+        if(n==k){
+            return *max_element(nums.begin(),nums.end());
         }
-        int result=-1;
-        for(auto & it:mainMap){
-            if(it.second==1){
-                result=max(result,it.first);
-            }
+
+        vector<int>freq(51,0);
+        for(int it:nums){
+            freq[it]++;
         }
-        return result;
+
+        if(k==1){
+            for(int i=50;i>=0;i--){
+                if(freq[i]==1){
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        int maxResult=-1;
+        if(freq[nums[0]]==1){
+            maxResult=max(maxResult,nums[0]);
+        }
+        if(freq[nums[n-1]]==1){
+            maxResult=max(maxResult,nums[n-1]);
+        }
+
+        return maxResult;
     }
 };
