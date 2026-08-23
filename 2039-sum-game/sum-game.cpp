@@ -1,34 +1,34 @@
 class Solution {
 public:
     bool sumGame(string num) {
-        int n=num.size();
-        int leftSum=0;
-        int lqCount=0;
-        for(int i=0;i< n/2;i++){
-            if(num[i]=='?'){
-                lqCount++;
+        int count1=0;
+        int count2=0;
+        int sum=0;
+        int n=num.length();
+        for(int i=0;i<n;i++){
+            if(i<n/2){
+                if(num[i]=='?'){
+                    count1++;
+                }
+                else{
+                    sum+=num[i]-'0';
+                }
             }
             else{
-                leftSum+=num[i]-'0';
+                if(num[i]=='?'){
+                    count2++;
+                }
+                else{
+                    sum-=num[i]-'0';
+                }
             }
         }
-        int rightSum=0;
-        int rqCount=0;
-        for(int i=n/2;i<n;i++){
-            if(num[i]=='?'){
-                rqCount++;
-            }
-            else{
-                rightSum+=num[i]-'0';
-            }
-        }
-        int totalqMark=lqCount+rqCount;
-        if(totalqMark %2 !=0){
+
+        if((count1+count2)%2!=0){
             return true;
         }
-        int qDiff=rqCount-lqCount;
-        int sumDiff=leftSum-rightSum;
+        int ans=sum+(count1/2)*9-(count2/2)*9;
 
-        return sumDiff !=9*qDiff/2;
+        return ans!=0;
     }
 };
