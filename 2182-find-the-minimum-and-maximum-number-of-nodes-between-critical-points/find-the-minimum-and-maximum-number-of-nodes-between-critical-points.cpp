@@ -20,18 +20,24 @@ bool isLocalMinima(ListNode*prev,ListNode*temp,ListNode*aNext){
         int localMaxima=-1;
         int localMinima=INT_MAX;
 
-        int currMaxima=0;
-        int currMinima=0;
+        int first=-1;
+        int last=-1;
 
         ListNode*prev=head;
         ListNode*temp=prev->next;
         ListNode*aNext=temp->next;
 
-        vector<int>points;
         int pos=2;
         while(aNext!=nullptr){
             if(isLocalMaxima(prev,temp,aNext) || isLocalMinima(prev,temp,aNext)){
-                points.push_back(pos);
+                if(first==-1){
+                    first=pos;
+                }
+                else{
+                    int distance=pos-last;
+                    localMinima=min(localMinima,distance);
+                }
+                last=pos;
             }
             prev=temp;
             temp=aNext;
@@ -39,16 +45,10 @@ bool isLocalMinima(ListNode*prev,ListNode*temp,ListNode*aNext){
 
             pos++;
         }
-
-        if(points.size() < 2){
-            return{-1,-1};
+        if(first==-1 || first==last){
+            return {-1,-1};
         }
-        localMaxima=points.back()-points.front();
-
-        for(int i=1;i<points.size();i++){
-            localMinima=min(localMinima,points[i]-points[i-1]);
-        }
-
+        localMaxima=last-first;
         return {localMinima,localMaxima};
     }
 };
