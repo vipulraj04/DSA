@@ -11,31 +11,25 @@
  */
 class Solution {
 public:
-int helper(TreeNode*root,int &count){
+pair<int,int>helper(TreeNode*root,int&result){
     if(root==nullptr){
-        return 0;
+        return {0,0};
     }
-    count++;
-    int leftSum=helper(root->left,count);
-    int rightSum=helper(root->right,count);
+    auto leftCall=helper(root->left,result);
+    auto rightCall=helper(root->right,result);
 
-    return leftSum+rightSum+root->val;
+    int sum=leftCall.first+rightCall.first+root->val;
+    int count=leftCall.second+rightCall.second+1;
+
+    if(sum/count==root->val){
+        result++;
+    }
+
+    return {sum,count};
 }
     int averageOfSubtree(TreeNode* root) {
         int result=0;
-        if(root==nullptr){
-            return 0;
-        }
-        int count=0;
-        int sum=helper(root,count);
-
-        if(sum/count == root->val){
-            result++;
-        }
-        result+=averageOfSubtree(root->left);
-        result+=averageOfSubtree(root->right);
-
-
+        helper(root,result);
         return result;
     }
 };
