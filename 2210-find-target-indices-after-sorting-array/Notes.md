@@ -1,1 +1,1 @@
-<h2>find-target-indices-after-sorting-array Notes</h2><hr>[ Time taken: 34m 21s ]
+<h2>find-target-indices-after-sorting-array Notes</h2><hr>[ Time taken: 1m 17s ]
