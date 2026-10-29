@@ -30,10 +30,27 @@ class Solution {
         int n=nums.length;
         int target=(totalSum-trg)/2;
         int [][] dp=new int[n][target+1];
-        for(int [] rows : dp){
-            Arrays.fill(rows,-1);
+        for(int i=0;i<n;i++){
+            dp[i][0]=1;
+        }
+        if(nums[0]==0){
+            dp[0][0]=2;
+        }
+        else if(nums[0]<=target){
+            dp[0][nums[0]]=1;
+        }
+        for(int i=1;i<n;i++){
+            for(int j=0;j<=target;j++){
+                int nTake=dp[i-1][j];
+                int take=0;
+                if(nums[i] <=j){
+                    take=dp[i-1][j-nums[i]];
+                }
+
+                dp[i][j]=take+nTake;
+            }
         }
 
-        return helper(n-1,nums,target,dp);
+        return dp[n-1][target];
     }
 }
